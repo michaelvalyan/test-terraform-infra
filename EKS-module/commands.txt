@@ -1,0 +1,39 @@
+
+helm install -n kube-system csi-secrets-store ./secrets-store-csi-driver/ --set syncSecret.enabled=true
+
+
+helm install -n kube-system secrets-provider-aws ./secrets-store-csi-driver-provider-aws/              
+
+
+
+POLICY_ARN=$(aws --region us-east-1 --query Policy.Arn --output text iam create-policy --policy-name 23c-secret-access-policy --policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [ {
+        "Effect": "Allow",
+        "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
+        "Resource": ["arn:aws:secretsmanager:us-east-1:036692858685:secret:testsecret-2u8EVV"]    
+    } ]
+}')
+
+
+eksctl create iamserviceaccount --name grafana-test-sa \
+	--region=us-east-1 --cluster 23c-centos-eks-cluster \
+	--namespace monitoring --approve \
+	--attach-policy-arn "$POLICY_ARN" \
+	--override-existing-serviceaccounts
+
+
+POLICY_ARN=$(aws --region us-east-1 --query Policy.Arn --output text iam create-policy --policy-name 23c-secret-access-test-policy --policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [ {
+        "Effect": "Allow",
+        "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
+        "Resource": ["arn:aws:secretsmanager:us-east-1:036692858685:secret:dev/grafana/grafana-credentials-UAKfO7"]    
+    } ]
+}')
+
+eksctl create iamserviceaccount --name grafana-test-sa \
+	--region=us-east-1 --cluster 23c-centos-eks-cluster \
+	--namespace monitoring --approve \
+	--attach-policy-arn "$POLICY_ARN" \
+	--override-existing-serviceaccounts
