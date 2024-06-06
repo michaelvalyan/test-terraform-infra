@@ -2,7 +2,7 @@ name: "Workflow - Deploy terrafrom to multy-account AWS environment"
 on:
   push:
     branches:
-      - "feature/**"
+      - "devbranch-michael"
   pull_request:
     branches:
       - staging
