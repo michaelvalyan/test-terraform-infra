@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - "feature/**"
+      - staging
+      - main
   pull_request:
     branches:
       - staging
