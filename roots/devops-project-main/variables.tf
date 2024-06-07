@@ -4,12 +4,14 @@
 variable "env" {
   description = "Env for Dev and Prod"
   type        = string
+  default     = "default"
 }
 
 # Define input variables for tag key
 variable "final_project_tag" {
   description = "Value for the 'tag-key'"
   type        = string
+  default     = "default_tag"
 }
 
 
