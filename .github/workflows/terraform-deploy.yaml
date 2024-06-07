@@ -36,6 +36,14 @@ jobs:
           role-session-name: GitHubActionsRoleSession
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Assume Role in Target Account
+        id: assume_target_account
+        run: |
+          ROLE_ARN=${{ secrets.CICD_IAM_ROLE }}
+          CREDENTIALS=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name GitHubActionsSession)
+          echo "AWS_ACCESS_KEY_ID=$(echo $CREDENTIALS | jq -r '.Credentials.AccessKeyId')" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=$(echo $CREDENTIALS | jq -r '.Credentials.SecretAccessKey')" >> $GITHUB_ENV
+          echo "AWS_SESSION_TOKEN=$(echo $CREDENTIALS | jq -r '.Credentials.SessionToken')" >> $GITHUB_ENV
       - name: Terraform Init
         run: |
           AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
