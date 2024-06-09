@@ -45,7 +45,7 @@ jobs:
         id: assume_target_account
         run: |
           ROLE_ARN=${{ secrets.CICD_IAM_ROLE }}
-          echo ROLE_ARN
+          echo $ROLE_ARN
           # Assume the role and capture the output
           ROLE_OUTPUT=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name GitHubActionsRoleSession)
 
