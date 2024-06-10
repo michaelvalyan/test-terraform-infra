@@ -72,16 +72,16 @@ jobs:
           # AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
           terraform init -backend-config="bucket=terraform-state-${ENVIRONMENT_STAGE}-test" -backend-config="key=main.tfstate"
 
-      - name: Terraform Format
-        run: terraform fmt
+      # - name: Terraform Format
+      #   run: terraform fmt
 
-      - name: Terraform Plan
-        run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+      # - name: Terraform Plan
+      #   run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
 
-      - name: Terraform Apply
-        run: |
-          terraform apply -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
-
-      # - name: Terraform Destroy
+      # - name: Terraform Apply
       #   run: |
-      #     terraform destroy -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
+      #     terraform apply -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
+
+      - name: Terraform Destroy
+        run: |
+          terraform destroy -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
