@@ -82,6 +82,6 @@ jobs:
         run: |
           terraform apply -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
 
-      # - name: Terraform Destroy
-      #   run: |
-      #     terraform destroy -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
+      - name: Terraform Destroy
+        run: |
+          terraform destroy -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
