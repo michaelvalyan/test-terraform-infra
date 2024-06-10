@@ -70,7 +70,7 @@ jobs:
         run: |
           aws sts get-caller-identity
           # AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
-          terraform init -backend-config="bucket=state-bucket-${ENVIRONMENT_STAGE}-test" -backend-config="key=main.tfstate"
+          terraform init -backend-config="bucket=terraform-state-${ENVIRONMENT_STAGE}-test" -backend-config="key=main.tfstate"
 
       - name: Terraform Format
         run: terraform fmt
