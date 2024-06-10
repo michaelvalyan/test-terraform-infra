@@ -59,6 +59,7 @@ jobs:
 
       - name: Terraform Init
         run: |
+          aws sts get-caller-identity
           # AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
           terraform init -backend-config="bucket=state-bucket-${ENVIRONMENT_STAGE}-test" -backend-config="key=main.tfstate"
 
