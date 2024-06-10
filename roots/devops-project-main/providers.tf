@@ -12,7 +12,7 @@ terraform {
   backend "s3" {
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraformlock"
+    dynamodb_table = "terraform-lock"
   }
 
   required_providers {
