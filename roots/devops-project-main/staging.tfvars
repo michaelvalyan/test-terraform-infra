@@ -13,8 +13,8 @@ private_subnets    = ["10.0.5.0/24", "10.0.6.0/24", "10.0.7.0/24", "10.0.8.0/24"
 
 # aws auth
 administrator_role_name = "AWSReservedSSO_Administrator_0238c8388aaa3bbe"
-terraform_role_name     = "GitHubActionsTerraformIAMrole"
-cicd_role_name          = "GitHubActionsCICDrole"
+# terraform_role_name     = "GitHubActionsTerraformIAMrole"
+# cicd_role_name          = "GitHubActionsCICDrole"
 
 # eks
 cluster_version  = "1.27"
