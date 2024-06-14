@@ -1,20 +1,22 @@
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
   global:
+    registry: public.ecr.aws/datadog
+    site: datadoghq.com
+    tags:
+      - env:aurora-staging
     credentials:
-      apiKey: 07798bd92d9a0c99c8835a6a39819e10
-      appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    podLabelsAsTags:
+      app: kube_app
+      release: helm_release
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+
