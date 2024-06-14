@@ -62,12 +62,12 @@ resource "aws_autoscaling_group" "eks_asg" {
       }
 
       override {
-        instance_type     = "t2.small"
+        instance_type     = "t3.small"
         weighted_capacity = "1"
       }
 
       override {
-        instance_type     = "t2.micro"
+        instance_type     = "t3.medium"
         weighted_capacity = "1"
       }
     }
