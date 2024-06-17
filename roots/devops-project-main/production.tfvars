@@ -17,7 +17,7 @@ administrator_role_name = "AWSReservedSSO_Administrator_0238c8388aaa3bbe"
 # cicd_role_name          = "GitHubActionsCICDrole"
 
 # eks
-cluster_version  = "1.27"
+cluster_version  = "1.26"
 k8s_service_cidr = "10.10.0.0/16"
 
 # worker
