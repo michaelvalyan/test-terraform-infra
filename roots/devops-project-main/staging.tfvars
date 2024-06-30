@@ -17,7 +17,7 @@ terraform_role_name     = "GitHubActionsTerraformIAMrole"
 # cicd_role_name          = "GitHubActionsCICDrole"
 
 # eks
-cluster_version  = "1.28"
+cluster_version  = '"1.27" -> "1.28"'
 k8s_service_cidr = "10.10.0.0/16"
 
 # worker
