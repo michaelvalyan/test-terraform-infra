@@ -9,6 +9,8 @@ provider "kubernetes" {
 }
 
 terraform {
+  required_version = ">= 1.9.0"
+
   backend "s3" {
     key            = "terraform.tfstate"
     region         = "us-east-1"
@@ -19,6 +21,10 @@ terraform {
     tls = {
       source  = "hashicorp/tls"
       version = "~> 4.0"
+    },
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
   }
 }
