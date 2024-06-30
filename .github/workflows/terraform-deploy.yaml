@@ -80,13 +80,26 @@ jobs:
       - name: Terraform Format
         run: terraform fmt
 
-      - name: Terraform Plan
-        run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+      # - name: Terraform Plan
+      #   run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
 
-      - name: Terraform Apply
-        run: |
-          terraform apply -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
+      # - name: Terraform Apply
+      #   run: |
+      #     terraform apply -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
 
       # - name: Terraform Destroy
       #   run: |
       #     terraform destroy -auto-approve -input=false -var-file="${ENVIRONMENT_STAGE}.tfvars"
+
+
+      - name: Terraform Plan for EKS Cluster
+        run: terraform plan -input=false -var-file=${{ env.ENVIRONMENT_STAGE }}.tfvars -target=module.eks-cluster.aws_eks_cluster.this -out=eks-cluster-plan
+
+      - name: Terraform Apply for EKS Cluster
+        run: terraform apply -auto-approve eks-cluster-plan
+
+      - name: Terraform Plan for aws-auth ConfigMap
+        run: terraform plan -input=false -var-file=${{ env.ENVIRONMENT_STAGE }}.tfvars -target=module.eks-cluster.kubernetes_config_map.aws_auth -out=aws-auth-plan
+
+      - name: Terraform Apply for aws-auth ConfigMap
+        run: terraform apply -auto-approve aws-auth-plan
