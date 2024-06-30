@@ -11,10 +11,10 @@ variable "administrator_role_name" {
   type        = string
 }
 
-# variable "terraform_role_name" {
-#   description = "The name of the IAM role for Terraform actions."
-#   type        = string
-# }
+variable "terraform_role_name" {
+  description = "The name of the IAM role for Terraform actions."
+  type        = string
+}
 
 # variable "cicd_role_name" {
 #   description = "The name of the IAM role for CI/CD actions."
