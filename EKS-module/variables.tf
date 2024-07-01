@@ -34,10 +34,10 @@ variable "subnet_ids" {
   description = "Subnet IDs to launch EKS cluster and worker nodes"
 }
 
-variable "cluster_version" {
-  description = "The desired Kubernetes version for the EKS cluster"
-  type        = string
-}
+# variable "cluster_version" {
+#   description = "The desired Kubernetes version for the EKS cluster"
+#   type        = string
+# }
 
 variable "k8s_service_cidr" {
   description = "The service IPv4 CIDR for the Kubernetes cluster"
