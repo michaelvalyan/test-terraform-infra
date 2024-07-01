@@ -17,12 +17,12 @@ resource "aws_eks_cluster" "eks_cluster" {
     service_ipv4_cidr = var.k8s_service_cidr
   }
 
-  encryption_config {
-    resources = ["secrets"]
-    provider {
-      key_arn = aws_kms_key.eks_kms_key.arn
-    }
-  }
+  # encryption_config {
+  #   resources = ["secrets"]
+  #   provider {
+  #     key_arn = aws_kms_key.eks_kms_key.arn
+  #   }
+  # }
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_policy_attachment,
