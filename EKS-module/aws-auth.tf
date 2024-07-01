@@ -28,17 +28,17 @@ resource "kubernetes_config_map" "aws_auth" {
         groups   = ["system:masters"]
         rolearn  = "arn:aws:iam::${local.account}:role/${var.administrator_role_name}"
         username = "${var.administrator_role_name}User"
+      },
+      {
+        groups   = ["system:masters"]
+        rolearn  = "arn:aws:iam::${local.account}:role/${var.terraform_role_name}"
+        username = "${var.terraform_role_name}User"
+      },
+      {
+        groups   = ["system:masters"]
+        rolearn  = "arn:aws:iam::654654483613:role/mg-account-trust-role"
+        username = "cicdrole"
       }
-      # {
-      #   groups   = ["system:masters"]
-      #   rolearn  = "arn:aws:iam::${local.account}:role/${var.terraform_role_name}"
-      #   username = "${var.terraform_role_name}User"
-      # },
-      # {
-      #   groups   = ["system:masters"]
-      #   rolearn  = "arn:aws:iam::654654483613:role/mg-account-trust-role"
-      #   username = "cicdrole"
-      # }
       # {
       #   groups   = ["system:masters"]
       #   rolearn  = "arn:aws:iam::${local.account}:role/${var.cicd_role_name}"
