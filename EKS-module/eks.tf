@@ -39,13 +39,6 @@ resource "aws_security_group" "eks_sg" {
     self      = true
   }
 
-  ingress {
-    from_port                = 443
-    to_port                  = 443
-    protocol                 = "tcp"
-    security_groups          = [aws_security_group.eks_nodes_sg.id]
-  }
-
   egress {
     from_port        = 0
     to_port          = 0
@@ -57,4 +50,13 @@ resource "aws_security_group" "eks_sg" {
   tags = {
     "kubernetes.io/cluster/${var.project_name}-eks-cluster" = "owned"
   }
+}
+
+resource "aws_security_group_rule" "eks_sg_ingress" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.eks_sg.id
+  source_security_group_id = aws_security_group.eks_nodes_sg.id
 }
