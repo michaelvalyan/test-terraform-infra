@@ -65,6 +65,22 @@ During the creation and management of the EKS cluster using this Terraform scrip
 - **Cycle Dependency Issue with Cross Resource References:**
   The addition of cross-resource references led to a cycle dependency issue. This was addressed by breaking down Terraform resources and specifying parameters associated with the issue outside of original resource, effectively solving the cycle dependency problem.
 
+- **ERROR: configmaps "aws-auth" is forbidden: User "system:anonymous" cannot get resource "configmaps" in API group "" in the namespace "kube-system"**
+
+  Documentation: https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs
+
+  Some cloud providers have short-lived authentication tokens that can expire relatively quickly. To ensure the Kubernetes provider is receiving valid credentials, an exec-based plugin can be used to fetch a new token before each Terraform operation. For example, on EKS, the command eks get-token can be used:
+
+  provider "kubernetes" {
+  host                   = var.cluster_endpoint
+  cluster_ca_certificate = base64decode(var.cluster_ca_cert)
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
+    command     = "aws"
+  }
+}
+
 
 #### Sources
 

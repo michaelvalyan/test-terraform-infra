@@ -21,7 +21,7 @@ module "eks-cluster" {
 
   # eks
   cluster_version  = var.cluster_version
-  subnet_ids       = module.vpc.public_subnet_ids
+  subnet_ids       = module.vpc.private_subnet_ids
   vpc_id           = module.vpc.vpc_id
   k8s_service_cidr = var.k8s_service_cidr
 
