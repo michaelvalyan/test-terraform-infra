@@ -60,6 +60,9 @@ For issues or questions regarding the Terraform script or EKS cluster management
 During the creation and management of the EKS cluster using this Terraform script, a couple of challenges were encountered:
 
 - **Worker Nodes Not Joining Cluster:**
+
+  https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshooteksworkernode.html
+  
   After the initial deployment, the worker nodes did not join the cluster. This issue was resolved by utilizing the `AWSSupport-TroubleshootEKSWorkerNode` runbook from AWS documentation. This runbook analyzes an Amazon EC2 worker node and Amazon EKS cluster to help identify and troubleshoot common causes that prevent worker nodes from joining a cluster, providing guidance to resolve any identified issues.
 
 - **Cycle Dependency Issue with Cross Resource References:**
