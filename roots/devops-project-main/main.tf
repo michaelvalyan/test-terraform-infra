@@ -16,7 +16,7 @@ module "eks-cluster" {
 
   # aws auth
   administrator_role_name    = var.administrator_role_name
-  # terraform_role_name        = var.terraform_role_name
+  terraform_role_name        = var.terraform_role_name
   # cicd_role_name             = var.cicd_role_name
 
   # eks
